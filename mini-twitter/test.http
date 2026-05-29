@@ -1,0 +1,57 @@
+### Register user 1
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "anjan",
+  "email": "anjan@gmail.com",
+  "password": "password123",
+  "bio": "Java developer from St. Louis"
+}
+
+### Register user 2
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "john",
+  "email": "john@gmail.com",
+  "password": "password123",
+  "bio": "Spring Boot enthusiast"
+}
+
+### Login as anjan
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "anjan",
+  "password": "password123"
+}
+
+### Create tweet (replace TOKEN)
+POST http://localhost:8080/tweets
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmphbiIsImlhdCI6MTc4MDA5MjgyOSwiZXhwIjoxNzgwMTc5MjI5fQ.NhGb_cLwJyOVbtO70s5cjW27r7IyLPPRLhn_IqE2mQY
+
+{
+  "content": "Hello Twitter! My first tweet using Spring Boot and JWT!"
+}
+
+### Get user profile (public)
+GET http://localhost:8080/users/anjan
+
+### Follow user 2 (replace TOKEN)
+POST http://localhost:8080/users/2/follow
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmphbiIsImlhdCI6MTc4MDA5MjgyOSwiZXhwIjoxNzgwMTc5MjI5fQ.NhGb_cLwJyOVbtO70s5cjW27r7IyLPPRLhn_IqE2mQY
+
+
+### Get timeline (replace TOKEN)
+GET http://localhost:8080/tweets/timeline
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmphbiIsImlhdCI6MTc4MDA5MjgyOSwiZXhwIjoxNzgwMTc5MjI5fQ.NhGb_cLwJyOVbtO70s5cjW27r7IyLPPRLhn_IqE2mQY
+
+
+
+### Like tweet (replace TOKEN)
+POST http://localhost:8080/tweets/1/like
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmphbiIsImlhdCI6MTc4MDA5MTg2OSwiZXhwIjoxNzgwMTc4MjY5fQ.ntztSBlpUYyvC1kV67fmrMRapbb17O7o_Z43t3Q3q6g
