@@ -38,9 +38,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
-                .requestMatchers("/auth/**")
-                .requestMatchers(HttpMethod.GET, "/tweets/**")
-                .requestMatchers(HttpMethod.GET, "/users/**");
+                .requestMatchers("/auth/**");
     }
 
     @Bean
@@ -51,6 +49,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // Public reads. The timeline stays protected: it needs the current user.
+                        .requestMatchers(HttpMethod.GET, "/tweets/user/**", "/users/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter,
                         UsernamePasswordAuthenticationFilter.class)
